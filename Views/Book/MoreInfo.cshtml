@@ -1,0 +1,44 @@
+﻿@model Readify.Models.Book
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container mt-5">
+    <div class="row mb-5">
+        <div class="col-md-6">
+            <img src="~/@Model.Photo" class="img-fluid rounded" alt="@Model.Title" style="max-height: 600px; object-fit: cover;">
+        </div>
+        <div class="col-md-6">
+            <h1>@Model.Title</h1>
+            <p><strong>Автор:</strong> @Model.Author</p>
+            <p><strong>Описание:</strong> @Model.Description</p>
+            <p><strong>Дата загрузки:</strong> @Model.UploadedAt.ToString("dd.MM.yyyy")</p>
+            <p><strong>Загружено пользователем:</strong> @Model.UploadedByUser.Username</p>
+            <a href="@Model.FilePath" class="btn btn-primary" download>Скачать книгу</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Комментарии</h3>
+            @if (Model.Comments.Any())
+            {
+                foreach (var comment in Model.Comments)
+                {
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">@comment.User.Username</h5>
+                            <p class="card-text">@comment.CommentText</p>
+                            <p class="text-muted"><small>@comment.CommentedAt.ToString("dd.MM.yyyy HH:mm")</small></p>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>Пока нет комментариев.</p>
+            }
+        </div>
+    </div>
+</div>
