@@ -34,5 +34,16 @@ namespace Readify.Controllers
 
             return View(book);
         }
+
+        public IActionResult DownloadFile(string filePath)
+        {
+            if (string.IsNullOrEmpty(filePath))
+            {
+                return NotFound("Файл не указан.");
+            }
+
+            var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            return File(fileStream, "application/pdf", Path.GetFileName(filePath));
+        }
     }
 }
