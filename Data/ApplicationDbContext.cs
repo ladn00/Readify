@@ -37,6 +37,7 @@ namespace Readify.Data
                 .WithMany(u => u.Comments)
                 .HasForeignKey(c => c.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
         }
     }
 }

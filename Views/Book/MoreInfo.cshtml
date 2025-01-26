@@ -19,7 +19,27 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" id="comments">
+
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <h3>Оставить комментарий</h3>
+                @if (Context.Session.GetString("UserId") != null)
+                {
+                    <form asp-action="AddComment" asp-controller="Book" method="post">
+                        <input type="hidden" name="BookId" value="@Model.BookId" />
+                        <div class="form-group">
+                            <textarea name="CommentText" class="form-control" rows="3" placeholder="Ваш комментарий"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Отправить</button>
+                    </form>
+                }
+                else
+                {
+                    <p>Чтобы оставить комментарий, <a href="/Auth/Login">войдите</a> или <a href="/Auth/Register">зарегистрируйтесь</a>.</p>
+                }
+            </div>
+        </div>
         <div class="col-md-12">
             <h3>Комментарии</h3>
             @if (Model.Comments.Any())

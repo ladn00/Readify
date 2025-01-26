@@ -1,0 +1,27 @@
+﻿@model List<Book>
+@if (Context.Session.GetString("UserId") == "3")
+{
+    <a asp-action="Create" class="btn btn-primary">Добавить книгу</a>
+}
+    
+<div class="row">
+    @foreach (var book in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/@book.Photo" class="card-img-top img-fluid" style="height: 600px; object-fit: cover;" alt="@book.Title">
+                <div class="card-body">
+                    <h5 class="card-title">@book.Title</h5>
+                    <p class="card-text">@book.Description</p>
+                    <a class="btn btn-primary" asp-controller="Book" asp-action="MoreInfo" asp-route-id="@book.BookId">Подробнее</a>
+                    @if (Context.Session.GetString("UserId") == "3")
+                    {
+
+                        <a asp-action="Edit" asp-controller="Book" asp-route-id="@book.BookId" class="btn btn-warning">Редактировать</a>
+                        <a asp-action="Delete" asp-controller="Book" asp-route-id="@book.BookId" class="btn btn-danger">Удалить</a>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

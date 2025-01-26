@@ -1,0 +1,61 @@
+﻿@model Book
+
+@{
+    ViewData["Title"] = "Редактировать книгу";
+}
+
+<h2>Редактировать книгу</h2>
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="BookId" />
+    <input type="hidden" asp-for="UserId" />
+    <input type="hidden" asp-for="Photo" />
+
+    <div class="form-group">
+        <label asp-for="Title" class="control-label"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Author" class="control-label"></label>
+        <input asp-for="Author" class="form-control" />
+        <span asp-validation-for="Author" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description" class="control-label"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FilePath" class="control-label"></label>
+        <textarea asp-for="FilePath" class="form-control"></textarea>
+        <span asp-validation-for="FilePath" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Текущая фотография</label>
+        <div>
+            @if (!string.IsNullOrEmpty(Model.Photo))
+            {
+                <img src="~/@Model.Photo" alt="Current Photo" class="img-fluid" style="max-height: 200px;" />
+            }
+            else
+            {
+                <p>Фотография отсутствует.</p>
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="newPhoto">Загрузить новую фотографию</label>
+        <input type="file" id="newPhoto" name="newPhoto" class="form-control-file" />
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Сохранить" class="btn btn-primary" />
+        <a asp-action="AllBooks" class="btn btn-secondary">Отмена</a>
+    </div>
+</form>

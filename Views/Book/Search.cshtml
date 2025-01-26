@@ -1,0 +1,32 @@
+﻿@model List<Readify.Models.Book>
+
+@{
+    ViewData["Title"] = "Результаты поиска";
+}
+
+<div class="container mt-5">
+    <h2>Результаты поиска</h2>
+
+    @if (Model.Any())
+    {
+        <div class="row">
+            @foreach (var book in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="~/@book.Photo" class="card-img-top" alt="@book.Title" style="height: 300px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">@book.Title</h5>
+                            <p class="card-text">@book.Author</p>
+                            <a href="/Book/Details/@book.BookId" class="btn btn-primary">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p>По вашему запросу ничего не найдено.</p>
+    }
+</div>
